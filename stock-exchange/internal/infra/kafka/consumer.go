@@ -1,8 +1,6 @@
 package kafka
 
 import (
-	"fmt"
-
 	ckafka "github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
@@ -29,8 +27,7 @@ func (c *Consumer) Consume(msgChan chan *ckafka.Message) {
 	}
 	for {
 		msg, err := consumer.ReadMessage(-1)
-		if err != nil {
-			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
+		if err == nil {
 			msgChan <- msg
 		}
 	}

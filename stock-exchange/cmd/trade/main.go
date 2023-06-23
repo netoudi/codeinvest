@@ -19,13 +19,16 @@ func main() {
 	defer wg.Wait()
 
 	kafkaMsgChan := make(chan *ckafka.Message)
-	configMap := &ckafka.ConfigMap{
+	configMapConsumer := &ckafka.ConfigMap{
 		"bootstrap.servers": "host.docker.internal:9094",
 		"group.id":          "myGroup",
 		"auto.offset.reset": "latest",
 	}
-	producer := kafka.NewProducer(configMap)
-	consumer := kafka.NewConsumer(configMap, []string{"input"})
+	configMapProducer := &ckafka.ConfigMap{
+		"bootstrap.servers": "host.docker.internal:9094",
+	}
+	producer := kafka.NewProducer(configMapProducer)
+	consumer := kafka.NewConsumer(configMapConsumer, []string{"input"})
 
 	go consumer.Consume(kafkaMsgChan)
 
