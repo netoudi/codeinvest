@@ -16,4 +16,29 @@ model Asset {
   price      Float
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  wallet_assets WalletAsset[]
+}
+
+model Wallet {
+  id         String   @id @map("_id")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  wallet_assets WalletAsset[]
+}
+
+model WalletAsset {
+  id         String   @id @map("_id")
+  wallet_id  String
+  asset_id   String
+  amount     Float
+  shares     Int      @db.Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  wallet Wallet @relation(fields: [wallet_id], references: [id])
+  asset  Asset  @relation(fields: [asset_id], references: [id])
+
+  @@unique([wallet_id, asset_id])
 }

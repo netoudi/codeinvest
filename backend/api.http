@@ -13,3 +13,14 @@ Content-Type: application/json
   "symbol": "A1",
   "price": 100
 }
+
+### list all wallets
+GET http://host.docker.internal:3333/wallets
+
+### create a new asset
+POST http://host.docker.internal:3333/wallets
+Content-Type: application/json
+
+{
+  "id": "wallet1"
+}
