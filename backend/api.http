@@ -24,3 +24,15 @@ Content-Type: application/json
 {
   "id": "wallet1"
 }
+
+### list assets from wallet
+GET http://host.docker.internal:3333/wallets/wallet1/assets
+
+### create a new asset in a wallet
+POST http://host.docker.internal:3333/wallets/wallet1/assets
+Content-Type: application/json
+
+{
+  "asset_id": "asset1",
+  "shares": 10
+}
