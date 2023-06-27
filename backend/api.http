@@ -1,0 +1,15 @@
+### hello world
+GET http://host.docker.internal:3333
+
+### list all assets
+GET http://host.docker.internal:3333/assets
+
+### create a new asset
+POST http://host.docker.internal:3333/assets
+Content-Type: application/json
+
+{
+  "id": "asset1",
+  "symbol": "A1",
+  "price": 100
+}
